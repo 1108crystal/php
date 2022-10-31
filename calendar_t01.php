@@ -23,18 +23,18 @@
 <?php
 $cal=[];
 
-$month=(isset($_GET['m']))?$_GET['m']:date("n");
-$year=(isset($_GET['y']))?$_GET['y']:date("Y");
+$month=(isset($_GET['m']))?$_GET['m']:date("n");//本月份
+$year=(isset($_GET['y']))?$_GET['y']:date("Y");//本年份
 
-$nextMonth=$month+1;
-$prevMonth=$month-1;
+$nextMonth=$month+1;//下個月
+$prevMonth=$month-1;//上個月
 
 
 $firstDay=$year."-".$month."-1";
-$firstDayWeek=date("N",strtotime($firstDay));
-$monthDays=date("t",strtotime($firstDay));
-$lastDay=$year.'-'.$month.'-'.$monthDays;
-$spaceDays=$firstDayWeek-1;
+$firstDayWeek=date("N",strtotime($firstDay)); //星期一到星期天  (1-7)
+$monthDays=date("t",strtotime($firstDay)); //指定月份的天數
+$lastDay=$year.'-'.$month.'-'.$monthDays;//指定月份的最後一天日期
+$spaceDays=$firstDayWeek-1;//指定月份前面空的天數
 $weeks=ceil(($monthDays+$spaceDays)/7);
 
 for($i=0;$i<$spaceDays;$i++){
