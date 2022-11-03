@@ -20,6 +20,7 @@
     </style>
 </head>
 <body>
+<a href='index.php'>回首頁</a><br>
 <?php
 $cal=[];
 
