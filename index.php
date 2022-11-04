@@ -16,6 +16,12 @@
     <li><a href="calendar.php">萬年曆</a></li>
     <li><a href="session.php">Session</a></li>
     <li><a href="cookie.php">cookie</a></li>
+
+</ul>
+<hr>
+<h1>自我練習</h1>
+<ul>
+    <li><a href="fun_date.php">日期函數練習</a></li>
 </ul>
 </body>
 </html>
