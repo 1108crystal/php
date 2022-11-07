@@ -11,14 +11,10 @@
     background-color:#faf7f6;
     background-repeat:no-repeat;
     /* background-image: url('/images/kimono/pg1.jpg'); */
+    border: 0px solid lightseagreen;
 }
 
-body>*:not(.aside, .section),
-aside>*,
-section>* {
-    border: 0px solid lightgray;
 
-}
 
 tr{
     height: 110px;
@@ -28,7 +24,8 @@ font-size: 20px;
 font-weight: bold;
 text-align: center;
 justify-content: center;
-height: 50px;
+height: 30px;
+margin: auto;
 }
 
 .day{

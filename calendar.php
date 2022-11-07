@@ -181,13 +181,13 @@ for ($i = 1; $i <= $monthDays; $i++) {
                         <td colspan="2" align="right" ><a href="?y=<?= $year; ?>&m=<?= $nextMonth; ?>">下一個月</a></td>
                     </tr>
                     <tr class="table-primary">
-                        <th><p class="title">一</p></th>
-                        <th><p class="title">二</p></th>
-                        <th><p class="title">三</p></th>
-                        <th><p class="title">四</p></th>
-                        <th><p class="title">五</p></th>
-                        <th><p class="title">六</p></th>
-                        <th><p class="title">日</p></th>
+                        <th><p></p><p class="title">一</p><p class="title">MON</p></th>
+                        <th><p></p><p class="title">二</p><p class="title">TUE</p></th>
+                        <th><p></p><p class="title">三</p><p class="title">WED</p></th>
+                        <th><p></p><p class="title">四</p><p class="title">THU</p></th>
+                        <th><p></p><p class="title">五</p><p class="title">FRI</p></th>
+                        <th  style="color: crimson;"><p></p><p class="title">六</p><p class="title">SAT</p></th>
+                        <th  style="color: crimson;"><p></p><p class="title">日</p><p class="title" >SUN</p></th>
                     </tr>
 
                     <?php
@@ -200,7 +200,9 @@ for ($i = 1; $i <= $monthDays; $i++) {
                         }
     
                         if ($i % 7 >= 5 || $showtext<>"") {
-                            echo "<th style='background-color: pink; width:80px;word-break:break-all;'><p class='day'>$day</p><p class='showtext'>$showtext</p></th>";
+                            echo "<th style='background-color: pink; width:80px;word-break:break-all;'><p class='day'>$day</p>
+                            <p class='showtext'>$showtext</p>
+                            </th>";
                         } else {
                             echo "<th ><p class='day'>$day</p><p class='showtext'>$showtext</p></th>";
                         }
