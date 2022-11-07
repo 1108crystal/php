@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+    overflow: hidden;
+    font-family: '標楷體';
+}
+
+.main {
+
+    padding: 0 12px;
+    margin: 0 auto;
+    background-color:lightsalmon;
+
+}
+
+body>*:not(.aside, .section),
+aside>*,
+section>* {
+    border: 0px solid lightgray;
+}
+
+.holiday{
+    background-color: pink;
+}
+
+/* top  */
+
+
+
+/* 中間  left */
+
+
+.content{
+    /* background-image: url(../images/kimono/pg.jpg); */
+    font-size: 18px;
+}
+
+
+
+
+.footer {
+
+    height: 20px;
+    color:#000000;
+    text-align: center;
+    font-size: 16px;
+    
+}
