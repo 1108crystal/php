@@ -1,23 +1,51 @@
 * {
-    box-sizing: border-box;
-    overflow: hidden;
+    /* box-sizing: border-box;
+    overflow: hidden; */
     font-family: '標楷體';
 }
 
 .main {
 
-    padding: 0 12px;
-    margin: 0 auto;
+    /* padding: 0 0px;
+    margin: 0 auto; */
     background-color:#faf7f6;
-
+    background-repeat:no-repeat;
+    /* background-image: url('/images/kimono/pg1.jpg'); */
 }
 
 body>*:not(.aside, .section),
 aside>*,
 section>* {
     border: 0px solid lightgray;
+
 }
 
+tr{
+    height: 110px;
+}
+.title{
+font-size: 20px;
+font-weight: bold;
+text-align: center;
+justify-content: center;
+height: 50px;
+}
+
+.day{
+    font-size: 18px;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    
+}
+
+.showtext{
+    font-size: 16px;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    color: crimson;
+}
 .holiday{
     background-color: pink;
 }
@@ -32,10 +60,14 @@ section>* {
 .content{
     /* background-image: url(../images/kimono/pg.jpg); */
     font-size: 18px;
+    
 }
 
 
-
+/* .calen{
+    background-image: url('/images/kimono/pg1.jpg');
+    background-repeat:no-repeat;
+} */
 
 .footer {
 

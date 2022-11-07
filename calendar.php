@@ -2,8 +2,52 @@
 https://www.startutorial.com/articles/view/how-to-build-a-web-calendar-in-php
 
 曆法從來就不是簡單的事情, 這個不知道有沒有幫助: https://gist.github.com/eagleon/1702129 -->
-
 <?php
+
+// ----------讀取2022/2023年的假日活動
+$holiday_data = array();
+$file = fopen('./data/holiday.csv', 'r');
+while (($line = fgetcsv($file)) !== FALSE) {
+    $holiday_data[] = $line;
+}
+fclose($file);
+// echo '<pre>';
+// print_r($holiday_data);
+// echo '</pre>';
+
+
+// 查詢是否有公佈的假日-----(有問題查不到)
+function fun_holiday($showday,$holiday_data) {
+    if (in_array($showday, $holiday_data[1])) {
+        return '找到了';
+    }else{
+        return 'NO';
+    }
+
+  }
+// PHP可以通過迴圈遍歷的方法將二維陣列中的每個值與要查詢的值進行比較，來判斷二維陣列中是否含有某個值(使用此方式s)
+  function deep_in_array($value, $array) {   
+    foreach($array as $item) {   
+        if(!is_array($item)) {   
+            if ($item == $value) {  
+                return $item[0]; 
+            } else {  
+                continue;   
+            }  
+        }   
+            
+        if(in_array($value, $item)) {  
+            return $item[0];    
+        } else if(deep_in_array($value, $item)) {  
+            return $item[0];     
+        }  
+    }   
+    return false;   
+}
+
+
+//---------------------------------------------------------------------//
+
 $cal = []; //指定月份的日期表
 
 $year = date('Y'); //年=>年份完整数字表示
@@ -22,7 +66,7 @@ if ($month <= 0) {
 
 $monthDays = date('t'); //指定月份的天數
 
-$showYearMonth = $year . '-' . $month; //顯示本月份
+$showYearMonth = $year . '年' . $month . '月'; //顯示本月份
 // 
 $nextMonth = $month + 1; //下個月
 $prevMonth = $month - 1; //上個月
@@ -48,7 +92,7 @@ for ($i = 1; $i <= $monthDays; $i++) {
 }
 
 ?>
-<!-- html -->
+<!------------------- html ------------------------------------>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,7 +122,7 @@ for ($i = 1; $i <= $monthDays; $i++) {
     <!-- <a href='index.php'>回首頁</a><br> -->
         <!-- A grey horizontal navbar that becomes vertical on small screens -->
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container-fluid">
+        <div class="container-fluid align-items-center" >
             <a class="navbar-brand" href="#"><i class="fa-brands fa-twitter"></i>萬年曆</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -96,11 +140,11 @@ for ($i = 1; $i <= $monthDays; $i++) {
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="" role="button"
-                            data-bs-toggle="dropdown">課程</a>
+                            data-bs-toggle="dropdown">版面</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="">課程1</a></li>
-                            <li><a class="dropdown-item" href="">課程2</a></li>
-                            <li><a class="dropdown-item" href="">課程3</a></li>
+                            <li><a class="dropdown-item" href="">版面1</a></li>
+                            <li><a class="dropdown-item" href="">版面2</a></li>
+                            <li><a class="dropdown-item" href="">版面3</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -122,41 +166,43 @@ for ($i = 1; $i <= $monthDays; $i++) {
         <div class="row">
             <div class="col-sm-5" >
 
-            <img width="640px" height="800px" src="./images/kimono/<?=$imgfiles;?>" class="rounded" alt="Cinque Terre">
+            <img width="90%" height="90%" src="./images/kimono/<?=$imgfiles;?>" class="rounded" alt="Cinque Terre">
                 <!-- <img src="./images/kimono/01.jpg" class="img-thumbnail" alt="Cinque Terre"> -->
             </div>
             <div class="col-sm-7">
 
-                <table class="table">
+                <table class="table" style="table-layout:fixed">
                     <tr>
-                        <td colspan="2"><a href="?y=<?= $year; ?>&m=<?= $prevMonth; ?>">上一個月</a></td>
+                        <td colspan="2" ><a href="?y=<?= $year; ?>&m=<?= $prevMonth; ?>">上一個月</a></td>
 
-                        <td colspan="3">
+                        <td colspan="3" align="center">
                             <h1><?= $showYearMonth; ?></h1>
                         </td>
-                        <td colspan="2"><a href="?y=<?= $year; ?>&m=<?= $nextMonth; ?>">下一個月</a></td>
+                        <td colspan="2" align="right" ><a href="?y=<?= $year; ?>&m=<?= $nextMonth; ?>">下一個月</a></td>
                     </tr>
                     <tr class="table-primary">
-                        <td>一</td>
-                        <td>二</td>
-                        <td>三</td>
-                        <td>四</td>
-                        <td>五</td>
-                        <td>六</td>
-                        <td>日</td>
+                        <th><p class="title">一</p></th>
+                        <th><p class="title">二</p></th>
+                        <th><p class="title">三</p></th>
+                        <th><p class="title">四</p></th>
+                        <th><p class="title">五</p></th>
+                        <th><p class="title">六</p></th>
+                        <th><p class="title">日</p></th>
                     </tr>
 
                     <?php
                     foreach ($cal as $i => $day) {
+                        $showday= $year . '/' . $month .'/'.$day;
+                        $showtext=deep_in_array($showday,$holiday_data);
 
                         if ($i % 7 == 0) {
                             echo "<tr>";
                         }
-
-                        if ($i % 7 >= 5) {
-                            echo "<td style=' background-color: pink;'>$day</td>";
+    
+                        if ($i % 7 >= 5 || $showtext<>"") {
+                            echo "<th style='background-color: pink; width:80px;word-break:break-all;'><p class='day'>$day</p><p class='showtext'>$showtext</p></th>";
                         } else {
-                            echo "<td >$day</td>";
+                            echo "<th ><p class='day'>$day</p><p class='showtext'>$showtext</p></th>";
                         }
 
                         if ($i % 7 == 6) {
@@ -173,7 +219,14 @@ for ($i = 1; $i <= $monthDays; $i++) {
 
 
         <!-- footer -->
-        <footer class="footer">萬年曆 ：023 白育菁</footer>
+        <footer class="footer">
+        <div class="row">
+            <div class="col-sm-5" >
+            萬年曆 ：023 白育菁
+                </div>
+                <div class="col-sm-7" ></div>
+                </div>
+        </footer>
 
 </body>
 
